@@ -1,9 +1,9 @@
-# Templat React-Typescript-Tailwindcss
+# Business Card
 
 <details open>
 <summary><h2> :scroll: Overview </h2></summary>
 
-Admin template for new projects with React, Typescript and Tailwindcss
+Business Card with React, Typescript and Tailwindcss
 
 </details>
 
@@ -13,7 +13,7 @@ Admin template for new projects with React, Typescript and Tailwindcss
 First clone the project:
 
 ```
-git clone https://github.com/walternascimentobarroso/react-tailwind.git
+git clone https://github.com/walternascimentobarroso/business-card.git
 ```
 
 </details>

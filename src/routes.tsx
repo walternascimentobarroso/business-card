@@ -8,6 +8,8 @@ import FaqPage from "./pages/Faq/FaqPage";
 import useAuth from "./hooks/useAuth";
 import Error404Page from "./pages/Error/Error404Page";
 import ProfilePage from "./pages/Profile/ProfilePage";
+import BusinessCardPage from "./pages/BusinessCard/BusinessCardPage";
+import SeeBusinessCardPage from "./pages/BusinessCard/SeeBusinessCardPage";
 
 const Private = ({ Item }: any) => {
   const { signed } = useAuth();
@@ -23,6 +25,16 @@ const routes: any[] = [
     path: "/home",
     exact: true,
     element: <Private Item={HomePage} />,
+  },
+  {
+    path: "/business-card",
+    exact: true,
+    element: <Private Item={BusinessCardPage} />,
+  },
+  {
+    path: "/business-card/see",
+    exact: true,
+    element: <SeeBusinessCardPage />,
   },
   {
     path: "/profile",
