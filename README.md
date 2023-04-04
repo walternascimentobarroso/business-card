@@ -59,7 +59,9 @@ git flow feature finish new-feature
 ```
 yarn build
 git add dist -f
+git commit -sam "🔧 CONFIG: Deploy"
 git subtree push --prefix dist origin gh-pages
+git reset --hard HEAD~
 ```
 
 </details>
