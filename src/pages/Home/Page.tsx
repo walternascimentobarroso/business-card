@@ -1,14 +1,11 @@
-import { useState } from "react";
 import { MdGroup, MdGroupAdd, MdGroupOff, MdGroupRemove } from "react-icons/md";
-import Modal from "../../components/Modal";
+import Card from "../../components/Card";
+import Title from "../../components/Title";
 import Template from "../../components/Template";
 import Breadcrumb from "../../components/Breadcrumb";
 import StatisticCard from "../../components/StatisticCard";
 
 export default () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const toggleModalClose = () => setIsModalOpen(!isModalOpen);
-
   return (
     <Template>
       <Breadcrumb
@@ -17,16 +14,10 @@ export default () => {
             label: "Home",
             href: "",
           },
-          {
-            label: "Templates",
-            href: "",
-          },
-          {
-            label: "Theme",
-            href: "",
-          },
         ]}
       />
+
+      <Title>Dashboard</Title>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 pb-4 gap-4">
         <StatisticCard
@@ -66,27 +57,16 @@ export default () => {
         />
       </div>
 
-      <div className="bg-white text-gray-700 dark:bg-gray-800 dark:border-gray-700 shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
-        <div className="mb-4 flex items-center justify-between">
-          <div>
-            <h3 className="text-gray-900 dark:text-gray-200 text-xl font-bold mb-2">
-              Blank page
-            </h3>
-            <span className="text-base font-normal text-gray-500">
-              This is a blank page!!
-              <button onClick={toggleModalClose}>Open</button>
-            </span>
+      <Card className="text-center">
+        <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-200 sm:text-4xl">
+          Dashboard
+        </h2>
 
-            <Modal
-              isOpen={isModalOpen}
-              onClose={toggleModalClose}
-              title="Exemplo de Modal"
-            >
-              <span>lol</span>
-            </Modal>
-          </div>
-        </div>
-      </div>
+        <p className="mt-4 text-gray-500 sm:text-xl">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione
+          dolores laborum impedit esse recusandae facere libero harum sequi.
+        </p>
+      </Card>
     </Template>
   );
 };

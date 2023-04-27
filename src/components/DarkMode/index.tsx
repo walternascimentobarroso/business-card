@@ -1,31 +1,31 @@
 import { useEffect, useState } from "react";
 import { MdBrightness3, MdSunny } from "react-icons/md";
 
-const DarkMode = () => {
+export default () => {
   const [darkMode, setDarkMode] = useState(() => {
-    const savedMode = localStorage.getItem("darkMode");
-    return savedMode ? JSON.parse(savedMode) : false;
+    const savedMode: any = localStorage.getItem("darkMode");
+    return savedMode !== null
+      ? JSON.parse(savedMode)
+      : window.matchMedia("(prefers-color-scheme: dark)").matches;
   });
 
   useEffect(() => {
-    window.onload = function () {
-      setDarkMode(window.matchMedia("(prefers-color-scheme: dark)").matches);
-      const savedMode = localStorage.getItem("darkMode");
-      if (savedMode !== null) setDarkMode(JSON.parse(savedMode));
+    window.onload = () => {
       if (darkMode) document.documentElement.classList.toggle("dark");
     };
   }, []);
 
-  useEffect(() => {
-    document.documentElement.classList.toggle("dark");
-    localStorage.setItem("darkMode", JSON.stringify(darkMode));
-  }, [darkMode]);
+  const changeDarkMode = () => {
+    const savedMode = document.documentElement.classList.toggle("dark");
+    setDarkMode(savedMode);
+    localStorage.setItem("darkMode", JSON.stringify(savedMode));
+  };
 
   return (
     <button
       type="button"
       aria-label="Color Mode"
-      onClick={() => setDarkMode(!darkMode)}
+      onClick={changeDarkMode}
       className="flex justify-center custom--btn"
     >
       {darkMode ? (
@@ -36,5 +36,3 @@ const DarkMode = () => {
     </button>
   );
 };
-
-export default DarkMode;

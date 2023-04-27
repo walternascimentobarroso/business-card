@@ -29,7 +29,6 @@ const ProfilePicture: React.FC<Props> = ({
 
   return (
     <div className="relative">
-      {/* {file ? (k */}
       <img
         src={
           file
