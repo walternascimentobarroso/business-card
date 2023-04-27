@@ -1,5 +1,7 @@
 # Business Card
 
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+
 <details open>
 <summary><h2> :scroll: Overview </h2></summary>
 
@@ -13,7 +15,7 @@ Business Card with React, Typescript and Tailwindcss
 First clone the project:
 
 ```
-git clone https://github.com/walternascimentobarroso/business-card.git
+git clone https://github.com/walternascimentobarroso/react-tailwind.git
 ```
 
 </details>
@@ -42,14 +44,21 @@ git flow feature finish new-feature
 <details open>
 <summary><h2> :hammer_and_pick: Tools </h2></summary>
 
-- [VSCode](https://code.visualstudio.com/)
-- [EditorConfig](https://editorconfig.org/)
-- [GitHub Action](https://github.com/features/actions/)
-- [GitFlow](https://github.com/nvie/gitflow/)
+- [GIT](https://git-scm.com/)
+  - [GitHub Action](https://github.com/features/actions/)
+  - [GitFlow](https://github.com/nvie/gitflow/)
 - [React](https://react.dev/)
+  - [React Icons](https://react-icons.github.io/react-icons/)
 - [Typescript](https://www.typescriptlang.org/)
+- [EditorConfig](https://editorconfig.org/)
+- [Prettier](https://prettier.io/)
+- [ESLint](https://eslint.org/)
 - [Tailwindcss](https://tailwindcss.com/)
-- [React Icons](https://react-icons.github.io/react-icons/)
+- [VSCode](https://code.visualstudio.com/)
+  - [EditorConfig for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
+  - [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+  - [VS Code ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+  - [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
 
 </details>
 
@@ -73,17 +82,28 @@ git reset --hard HEAD~
 
 | **Description**  | **Type**  |
 | ---------------- | --------- |
+| Accordion        | Component |
+| Alert            | Component |
 | AsideMenu        | Component |
 | Breadcrumb       | Component |
 | Button           | Component |
+| Card             | Component |
+| CustomSelect     | Component |
 | DarkMode         | Component |
 | Dropdown         | Component |
 | Footer           | Component |
+| Fullscreen       | Component |
 | Header           | Component |
 | Input            | Component |
+| Modal            | Component |
+| PasswordInput    | Component |
 | ProfilePicture   | Component |
+| SearchButton     | Component |
+| Spinner          | Component |
+| StatisticCard    | Component |
 | Table            | Component |
 | Template         | Component |
+| Title            | Component |
 | Tooltip          | Component |
 | TopButton        | Component |
 | Component        | Page      |

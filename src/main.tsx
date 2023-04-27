@@ -12,11 +12,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       <BrowserRouter basename={import.meta.env.BASE_URL}>
         <Routes>
           {routes.map((route) => (
-            <Route key={route.path} {...route}>
-              {route.children?.map((route: any) => (
-                <Route key={route.path} {...route} />
-              ))}
-            </Route>
+            <Route key={route.path} {...route} />
           ))}
         </Routes>
       </BrowserRouter>

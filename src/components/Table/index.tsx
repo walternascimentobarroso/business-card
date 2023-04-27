@@ -1,52 +1,14 @@
-const Table = () => {
-  const tHeads = [
-    {
-      description: "Description",
-    },
-    {
-      description: "Color",
-    },
-    {
-      description: "Category",
-    },
-    {
-      description: "Price",
-    },
-    {
-      description: "Actions",
-    },
-  ];
-
-  const data = [
-    {
-      description: "Apple MacBook Pro 17'",
-      color: "Silver",
-      category: "Laptop",
-      price: "$2999",
-    },
-    {
-      description: "Apple MacBook Pro 17'",
-      color: "Silver",
-      category: "Laptop",
-      price: "$2999",
-    },
-    {
-      description: "Apple MacBook Pro 17'",
-      color: "Silver",
-      category: "Laptop",
-      price: "$2999",
-    },
-  ];
+const Table = ({ caption = "", tHeads, data, action }: any) => {
   return (
     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
       <caption className="p-5 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-        List of Users
+        {caption}
       </caption>
-      <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-600 dark:text-gray-400">
+      <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-500 dark:text-gray-400">
         <tr>
           {tHeads.map((head: any, index: any) => (
-            <th scope="col" className="px-6 py-3" key={index}>
-              {head.description}
+            <th className="px-6 py-3" key={index}>
+              {head}
             </th>
           ))}
         </tr>
@@ -57,20 +19,12 @@ const Table = () => {
             className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
             key={index}
           >
-            <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-              {record.description}
-            </th>
-            <td className="px-6 py-4">{record.color} </td>
-            <td className="px-6 py-4">{record.category}</td>
-            <td className="px-6 py-4">{record.price}</td>
-            <td className="px-6 py-4">
-              <a
-                href="#"
-                className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-              >
-                Edit
-              </a>
-            </td>
+            {Object.keys(record).map((key) => (
+              <td key={key} className="px-6 py-4">
+                {record[key]}
+              </td>
+            ))}
+            <td>{action(record)}</td>
           </tr>
         ))}
       </tbody>

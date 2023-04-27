@@ -2,123 +2,107 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import {
-  MdAccountBox,
   MdGroup,
+  MdLockPerson,
   MdLogout,
   MdOutlineFilterVintage,
   MdOutlineQuestionMark,
   MdPieChart,
 } from "react-icons/md";
 
-const AsideMenu = () => {
+interface MenuAsideProps {
+  isMenuOpen: boolean;
+}
+
+export default ({ isMenuOpen }: MenuAsideProps) => {
   const { signOut } = useAuth();
   const navigate = useNavigate();
-  const [activeLink] = useState(window.location.pathname);
+  const [activeLink] = useState(() => {
+    const textOriginal = window.location.pathname;
+    const textRemoved = import.meta.env.BASE_URL;
+    return textOriginal.replace(textRemoved, "");
+  });
+
+  /**
+   * Dynamic links loaded according to the project/user
+   */
+  const menu = [
+    {
+      href: "/home",
+      title: "Dashboard",
+      icon: <MdPieChart className="w-6 h-6 custom--svg" />,
+    },
+    {
+      href: "/user",
+      title: "Users",
+      icon: <MdGroup className="w-6 h-6 custom--svg" />,
+    },
+    {
+      href: "/role",
+      title: "Roles",
+      icon: <MdLockPerson className="w-6 h-6 custom--svg" />,
+    },
+  ];
+
+  /**
+   * Common sticky links for all
+   */
+  const menuHardLink = [
+    {
+      href: "/faq",
+      title: "FAQ's",
+      icon: <MdOutlineQuestionMark className="w-6 h-6 custom--svg" />,
+    },
+    {
+      href: "/components",
+      title: "Components",
+      icon: <MdOutlineFilterVintage className="w-6 h-6 custom--svg" />,
+    },
+  ];
 
   return (
     <aside
       id="sidebar"
-      className="fixed hidden z-20 h-full top-0 left-0 pt-16 flex lg:flex flex-shrink-0 flex-col w-64 transition-width duration-75"
+      className={`fixed z-20 h-full top-0 left-0 pt-16 flex flex-shrink-0 flex-col w-64 transition-width duration-150 ease-in-out
+      ${!isMenuOpen && "w-0"}`}
       aria-label="Sidebar"
     >
       <div className="custom--bg relative flex-1 flex flex-col min-h-0 border-r pt-0">
         <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
           <div className="custom--bg flex-1 px-3 divide-y space-y-1">
-            <ul className="space-y-2 pb-2">
-              <li>
-                <form action="#" method="GET" className="lg:hidden">
-                  <label htmlFor="mobile-search" className="sr-only">
-                    Search
-                  </label>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <svg
-                        className="w-5 h-5 text-gray-500"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
-                      </svg>
-                    </div>
-                    <input
-                      type="text"
-                      name="email"
-                      id="mobile-search"
-                      className="bg-gray-50 dark:bg-gray-700 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-cyan-600 focus:ring-cyan-600 block w-full pl-10 p-2.5"
-                      placeholder="Search"
-                    />
-                  </div>
-                </form>
-              </li>
-              <li>
+            <div className="space-y-2 pb-2">
+              {menu.map((item: any, index: any) => (
                 <Link
-                  to="/home"
+                  key={index}
+                  to={item.href}
                   className={`custom--link rounded-lg flex items-center p-2 ${
-                    activeLink === "/home" &&
+                    activeLink === item.href &&
                     "text-gray-900 bg-gray-200 dark:bg-gray-600 dark:text-white"
                   }`}
                 >
-                  <MdPieChart className="w-6 h-6 custom--svg" />
+                  {item.icon}
                   <span className="ml-3 flex-1 whitespace-nowrap">
-                    Dashboard
+                    {item.title}
                   </span>
                 </Link>
-              </li>
-
-              <li>
-                <Link
-                  to="/business-card"
-                  className={`custom--link rounded-lg flex items-center p-2 ${
-                    activeLink === "/business-card" &&
-                    "text-gray-900 bg-gray-200 dark:bg-gray-600 dark:text-white"
-                  }`}
-                >
-                  <MdAccountBox className="w-6 h-6 custom--svg" />
-                  <span className="ml-3 flex-1 whitespace-nowrap">
-                    Business Card
-                  </span>
-                </Link>
-              </li>
-
-              <li>
-                <Link
-                  to="/user"
-                  className={`custom--link rounded-lg flex items-center p-2 ${
-                    activeLink === "/user" &&
-                    "text-gray-900 bg-gray-200 dark:bg-gray-600 dark:text-white"
-                  }`}
-                >
-                  <MdGroup className="w-6 h-6 custom--svg" />
-                  <span className="ml-3 flex-1 whitespace-nowrap">Users</span>
-                  <span className="custom--badge">4</span>
-                </Link>
-              </li>
-            </ul>
+              ))}
+            </div>
             <div className="space-y-2 pt-2">
-              <Link
-                to="/faq"
-                className={`custom--link rounded-lg flex items-center p-2 ${
-                  activeLink === "/faq" &&
-                  "text-gray-900 bg-gray-200 dark:bg-gray-600 dark:text-white"
-                }`}
-              >
-                <MdOutlineQuestionMark className="w-6 h-6 custom--svg" />
-
-                <span className="ml-3 flex-1 whitespace-nowrap">FAQ's</span>
-              </Link>
-              <Link
-                to="/components"
-                className={`custom--link rounded-lg flex items-center p-2 ${
-                  activeLink === "/components" &&
-                  "text-gray-900 bg-gray-200 dark:bg-gray-600 dark:text-white"
-                }`}
-              >
-                <MdOutlineFilterVintage className="w-6 h-6 custom--svg" />
-                <span className="ml-3 flex-1 whitespace-nowrap">
-                  Components
-                </span>
-              </Link>
+              {menuHardLink.map((item: any, index: any) => (
+                <Link
+                  key={index}
+                  to={item.href}
+                  className={`custom--link rounded-lg flex items-center p-2 ${
+                    activeLink === item.href &&
+                    "text-gray-900 bg-gray-200 dark:bg-gray-600 dark:text-white"
+                  }`}
+                >
+                  {item.icon}
+                  <span className="ml-3 flex-1 whitespace-nowrap">
+                    {item.title}
+                  </span>
+                </Link>
+              ))}
               <button
                 onClick={() => [signOut(), navigate("/")]}
                 className="custom--link rounded-lg flex items-center p-2 text-left w-full"
@@ -133,5 +117,3 @@ const AsideMenu = () => {
     </aside>
   );
 };
-
-export default AsideMenu;

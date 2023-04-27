@@ -1,29 +1,34 @@
-import React from "react";
-
-type InputProps = {
-  type: string;
-  placeholder: string;
-  value: string;
-  className: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-};
-
-const Input: React.FC<InputProps> = ({
-  type,
-  placeholder,
+export default ({
+  label,
+  name,
+  type = "text",
+  placeholder = "",
   value,
-  className,
   onChange,
-}) => {
+  onBlur = () => {},
+  readOnly = false,
+}: any) => {
   return (
-    <input
-      className={className}
-      value={value}
-      onChange={onChange}
-      type={type}
-      placeholder={placeholder}
-    />
+    <div className="mb-4">
+      <label
+        className="block mb-2 text-sm font-bold text-gray-700 dark:text-white dark:bg-gray-800"
+        htmlFor={name}
+      >
+        {label}
+      </label>
+      <input
+        className={`bg-white dark:bg-gray-700 border border-gray-300 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full px-3 py-2 mb-3
+        ${readOnly && "bg-gray-100 dark:bg-gray-900"}`}
+        id={name}
+        name={name}
+        value={value}
+        onChange={onChange}
+        type={type}
+        placeholder={placeholder}
+        readOnly={readOnly}
+        onBlur={onBlur}
+      />
+      {/* <p className="text-xs italic text-red-500">Please choose a password.</p> */}
+    </div>
   );
 };
-
-export default Input;
