@@ -13,6 +13,8 @@ import ComponentPage from "./pages/Component/Page";
 import LoginPage from "./pages/Auth/LoginPage";
 import RegisterPage from "./pages/Auth/RegisterPage";
 import RecoverPasswordPage from "./pages/Auth/RecoverPasswordPage";
+import SeeBusinessCardPage from "./pages/BusinessCard/SeeBusinessCardPage";
+import BusinessCardPage from "./pages/BusinessCard/BusinessCardPage";
 
 const Private = ({ Item }: any) => {
   const { signed } = useAuth();
@@ -33,6 +35,16 @@ const routes: any[] = [
     path: "/profile",
     exact: true,
     element: <Private Item={ProfilePage} />,
+  },
+  {
+    path: "/business-card",
+    exact: true,
+    element: <Private Item={BusinessCardPage} />,
+  },
+  {
+    path: "/business-card/see",
+    exact: true,
+    element: <SeeBusinessCardPage />,
   },
   {
     path: "/user",

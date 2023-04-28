@@ -1,27 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 
-interface Props {
+interface BusinessCardProps {
   name: string;
-  title: string;
+  jobTitle: string;
   email: string;
   phone: string;
-  address: string;
+  photoUrl: string;
 }
 
-const BusinessCard: React.FC<Props> = ({
+const BusinessCard: React.FC<BusinessCardProps> = ({
   name,
-  title,
+  jobTitle,
   email,
   phone,
-  address,
+  photoUrl,
 }) => {
+  const [showDetails, setShowDetails] = useState(false);
+
+  const handleClick = () => {
+    setShowDetails(!showDetails);
+  };
+
   return (
-    <div className="p-4 border rounded-lg shadow-md">
-      <h2 className="text-xl font-bold mb-2">{name}</h2>
-      <p className="text-gray-700 mb-2">{title}</p>
-      <p className="text-gray-700 mb-2">{email}</p>
-      <p className="text-gray-700 mb-2">{phone}</p>
-      <p className="text-gray-700">{address}</p>
+    <div
+      className={`max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl transform transition duration-500 hover:scale-105 ${
+        showDetails ? "hover:scale-100 rotate-y-180" : ""
+      }`}
+      onClick={handleClick}
+    >
+      <div className="relative">
+        <img
+          className="h-48 w-full object-cover rounded-t-xl"
+          src={photoUrl}
+          alt={`Foto de ${name}`}
+        />
+        <div className="absolute top-0 left-0 px-4 py-2 bg-white text-gray-800 font-semibold">
+          {name}
+        </div>
+      </div>
+      {showDetails && (
+        <div className="p-8">
+          <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
+            {jobTitle}
+          </div>
+          <p className="mt-2 text-gray-500">{phone}</p>
+          <p className="mt-2 text-gray-500">{email}</p>
+        </div>
+      )}
     </div>
   );
 };
