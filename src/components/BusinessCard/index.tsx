@@ -1,37 +1,45 @@
 import React, { useState } from "react";
-import { MdContentCopy, MdLockOpen, MdLockOutline } from "react-icons/md";
-import { useModal } from "../../hooks/useModal";
-
+import Button from "../Button";
+import { MdContentCopy } from "react-icons/md";
+import Tooltip from "../Tooltip";
+import Toast from "../Toast";
 interface BusinessCardProps {
+  photoUrl: string;
   name: string;
   jobTitle: string;
-  email: string;
-  phone: string;
-  photoUrl: string;
+  data: any;
 }
 
 const BusinessCard: React.FC<BusinessCardProps> = ({
+  photoUrl,
   name,
   jobTitle,
-  email,
-  phone,
-  photoUrl,
+  data,
 }) => {
-  const { openModal, closeModal, ModalWrapper } = useModal();
+  const [showDetails, setShowDetails] = useState(true);
+  const [list, setList]: any = useState([]);
+  const showToast = (type: string, title: string, description: string) => {
+    const toastProperties = {
+      id: list.length + 1,
+      title,
+      description,
+      type,
+    };
+    setList([...list, toastProperties]);
+  };
 
-  const [showDetails, setShowDetails] = useState(false);
-
-  const handleClick = () => {
-    setShowDetails(!showDetails);
+  const clipboardCopy = async (value: any) => {
+    await navigator.clipboard.writeText(value);
+    showToast("success", "Copied", "Copied with success");
   };
 
   return (
     <>
+      <Toast toasties={list} position="top-right" setList={setList} />
       <div
         className={`mx-auto bg-white rounded-xl shadow-md overflow-hidden transform transition duration-500 hover:scale-105 ${
           showDetails ? "hover:scale-100 rotate-y-180" : ""
-        }`}
-        onClick={handleClick}
+        } w-1/2 overflow-y-auto m-8`}
       >
         <div className="relative">
           <img
@@ -48,24 +56,42 @@ const BusinessCard: React.FC<BusinessCardProps> = ({
             <div className="uppercase text-indigo-500 font-semibold">
               {jobTitle}
             </div>
-            <div className="flex mt-2">
-              <strong>phone: </strong>
-              <span className="text-gray-500">{phone}</span>
-              <MdLockOpen onClick={openModal} />
-              <MdContentCopy />
-            </div>
-            <div className="flex mt-2">
+            {Object.entries(data).map(([key, value]: any) => (
+              <div className="flex mt-2 justify-between" key={key}>
+                <strong className="capitalize">{key}: </strong>
+                <div className="text-right w-full mr-4">
+                  <span className="text-gray-500">{value}</span>
+                </div>
+                <Tooltip tooltip="Copy">
+                  <button onClick={() => clipboardCopy(value)} className="">
+                    <MdContentCopy className="w-6 h-6 transform transition-all duration-300 hover:scale-150" />
+                  </button>
+                </Tooltip>
+              </div>
+            ))}
+            {/* <div className="flex mt-2 justify-between">
               <strong>E-Mail: </strong>
-              <span className="text-gray-500">{email}</span>
-              <MdLockOutline />
-              <MdContentCopy />
-            </div>
+              <div className="text-right w-full mr-4">
+                <span className="text-gray-500">{email}</span>
+              </div>
+              <Tooltip tooltip="Copy">
+                <button onClick={() => clipboardCopy(email)}>
+                  <MdContentCopy className="w-6 h-6" />
+                </button>
+              </Tooltip>
+            </div> */}
           </div>
         )}
+
+        <div className="p-2">
+          <Button
+            onClick={() => setShowDetails(!showDetails)}
+            customClass="w-full"
+          >
+            Flip
+          </Button>
+        </div>
       </div>
-      <ModalWrapper title="Role">
-        <span>Senha para desbloquear</span>
-      </ModalWrapper>
     </>
   );
 };
