@@ -14,8 +14,8 @@ import Spinner from "../../components/Spinner";
 
 export default () => {
   const { openModal, closeModal, ModalWrapper } = useModal();
-  const [list, setList]: any = useState([]);
   const [loading, setLoading]: any = useState(false);
+  const [list, setList]: any = useState([]);
   const showToast = (type: string, title: string, description: string) => {
     const toastProperties = {
       id: list.length + 1,

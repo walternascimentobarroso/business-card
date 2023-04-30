@@ -24,7 +24,7 @@ const TopButton: any = ({ passRef }: any) => {
         <button
           onClick={() => scrollToTop()}
           className="fixed bottom-4 right-4 z-50 p-2 rounded-full 
-          custom--bg hover:bg-gray-200 dark:hover:bg-gray-600 shadow"
+          custom--bg hover:bg-gray-200 dark:hover:bg-gray-600 shadow animate-bounce"
         >
           <MdOutlineNorth className="h-6 w-6" />
         </button>
